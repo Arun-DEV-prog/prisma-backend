@@ -1,0 +1,9 @@
+enum activeStatus {
+    Active
+    InActive
+}
+
+enum Role {
+    user
+    admin
+}
