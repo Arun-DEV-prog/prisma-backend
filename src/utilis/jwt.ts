@@ -12,15 +12,17 @@ const verifyToken=(token: string, secret: string)=>{
       try{
          const verifiedToken=jwt.verify(token, secret);
 
-     return{
-         success: true,
-         data: verifiedToken
-     }
+         return{
+             success: true,
+             data: verifiedToken as JwtPayload
+         }
 
-      }catch(error: any){
+      }catch(error: unknown){
+          const message = error instanceof Error ? error.message : "Invalid token";
+
           return{
              success: false,
-             error: error.massage
+             error: message
           }
       }
 }
