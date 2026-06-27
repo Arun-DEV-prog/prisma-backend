@@ -9,6 +9,7 @@ import  httpStatus from "http-status";
 import bcrypt from "bcryptjs";
 import { userRoute } from "./moduls/user/user.route";
 import { authRoutes } from "./moduls/auth/auth.route";
+import { postRoutes } from "./moduls/posts/posts.route";
 
 
 
@@ -32,6 +33,8 @@ app.get("/", (req: Request, res: Response)=>{
 app.use("/api/users/", userRoute)
 
 app.use('/api/auth',authRoutes)
+
+app.use('/api/posts',postRoutes)
 
 
 

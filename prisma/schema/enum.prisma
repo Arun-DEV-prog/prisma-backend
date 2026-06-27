@@ -7,3 +7,13 @@ enum Role {
     user
     admin
 }
+
+enum PostStatus {
+    DRAFT
+    PUBLISHED
+}
+
+enum CommentStatus {
+    APPROVE
+    REJECT
+}
