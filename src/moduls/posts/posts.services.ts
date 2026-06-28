@@ -1,3 +1,4 @@
+import { PostStatus } from "../../../generated/prisma/enums"
 import { prisma } from "../../lib/prisma"
 import type { ICreatePayload, IupdatePostPayload } from "./post.interface"
 
@@ -194,6 +195,55 @@ const deletedPostById= async(authorId: string, postId: string, isAdmin: boolean)
 }
 
 
+const  getallpostStats=async()=>{
+    
+    const transcationResult= await prisma.$transaction(
+         async(tx)=>{
+            
+        const[
+            totalpost,
+             totalDraftPost,
+             totalPublishedPost,
+             totalViews
+
+        ]  =  await  Promise.all([
+                await tx.post.count(),
+                 await tx.post.count({
+                     where:{
+                         status: PostStatus.DRAFT
+                     }
+                 }),
+                 await tx.post.count({
+                     where: {
+                          status: PostStatus.PUBLISHED
+                     }
+                 }),
+
+                 await tx.post.aggregate({
+                     _sum: {
+                         views:true
+                     }
+                 })
+            ])
+
+
+            return{
+                 totalpost,
+                 totalDraftPost,
+             totalPublishedPost,
+             totalViews 
+            }
+
+
+         }
+    )
+    
+
+
+    return transcationResult;
+
+}
+
 
 export const postsService={
      getallPostService,
@@ -201,5 +251,6 @@ export const postsService={
      getPostById,
      getMyPost,
      updatePostById,
-     deletedPostById
+     deletedPostById,
+     getallpostStats
 }
