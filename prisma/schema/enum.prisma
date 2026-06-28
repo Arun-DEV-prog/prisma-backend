@@ -6,6 +6,7 @@ enum activeStatus {
 enum Role {
     user
     admin
+    author
 }
 
 enum PostStatus {

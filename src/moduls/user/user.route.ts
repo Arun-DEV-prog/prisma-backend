@@ -62,7 +62,7 @@ router.get(
 //      next(error);
 //    }
 //  },
- auth(Role.user, Role.admin), userController.getMyProfile
+ auth(Role.user, Role.admin,Role.author), userController.getMyProfile
 );
 
  router.put('/my-profile', auth(Role.user, Role.user), userController.updateMyProfile)
