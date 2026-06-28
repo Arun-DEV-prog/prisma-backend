@@ -10,6 +10,7 @@ import bcrypt from "bcryptjs";
 import { userRoute } from "./moduls/user/user.route";
 import { authRoutes } from "./moduls/auth/auth.route";
 import { postRoutes } from "./moduls/posts/posts.route";
+import { commentRoutes } from "./moduls/comments/comments.route";
 
 
 
@@ -36,7 +37,7 @@ app.use('/api/auth',authRoutes)
 
 app.use('/api/posts',postRoutes)
 
-//app.use("/api/comments",commentRoutes)
+app.use("/api/comments",commentRoutes)
 
 
 
