@@ -8,12 +8,14 @@ import httpStatus from 'http-status';
              await fn(req, res,next)
          }catch(error){
                console.log(error)
-        res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-             success:false,
-             stutusCode: httpStatus.INTERNAL_SERVER_ERROR,
-             massage: "Faild to register user",
-             error:(error as Error).message
-        })
+               const message = (error as Error).message
+               const isNotFound = /not found/i.test(message)
+               res.status(isNotFound ? httpStatus.NOT_FOUND : httpStatus.INTERNAL_SERVER_ERROR).json({
+                    success:false,
+                    stutusCode: isNotFound ? httpStatus.NOT_FOUND : httpStatus.INTERNAL_SERVER_ERROR,
+                    massage: message,
+                    error: message
+               })
          }
      }
 }

@@ -1,8 +1,8 @@
 model Post {
     id         String     @id @default(uuid())
-    title      String     @db.Varchar(255)
+    title      String     @db.VarChar(255)
     content    String
-    thumbanil  String?
+    thumbnail  String?
     isFeatured Boolean    @default(false)
     status     PostStatus @default(PUBLISHED)
     tags       String[]
@@ -10,7 +10,7 @@ model Post {
     createdAT  DateTime   @default(now())
     updatedAT  DateTime   @updatedAt
     authorId   String
-    auhtor     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
+    author     User       @relation(fields: [authorId], references: [id], onDelete: Cascade)
     comments   Comment[]
 
     @@index([authorId])
