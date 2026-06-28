@@ -7,7 +7,7 @@ const router= Router();
 
 
 router.get("/",postController.getPostController)
-router.get("/stats", auth(Role.admin),postController.getStatsPostController)
+router.get("/stats", auth(Role.admin,Role.user),postController.getStatsPostController)
 router.get("/my-posts",auth(Role.admin, Role.user, Role.author),postController.getMYPostController)
 router.get("/:postId",postController.getPostByIdController)
 router.post(

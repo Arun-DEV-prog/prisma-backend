@@ -19,7 +19,15 @@ const getPostController=catchAsync(async(req:Request, res:Response, next:NextFun
      })
 })
 const getStatsPostController=catchAsync(async(req:Request, res:Response, next:NextFunction)=>{
-     
+        
+     const result= await postsService.getallpostStats();
+
+      sendResponse(res,{
+           success: true,
+           statusCode: httpStatus.OK,
+           massage: " successfully retrive post stats",
+           data: result
+      })
 })
 const getMYPostController=catchAsync(async(req:Request, res:Response, next:NextFunction)=>{
      
