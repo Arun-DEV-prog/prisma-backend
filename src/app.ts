@@ -1,6 +1,6 @@
 import cookieParser from "cookie-parser";
-import type { Application, Request,Response } from "express";
-import express, { request } from "express"
+import type { Application, Request,Response,NextFunction } from "express";
+import express, { request, response } from "express"
 import cors from "cors";
 import config from "./config";
 import { prisma } from "./lib/prisma";
@@ -11,6 +11,9 @@ import { userRoute } from "./moduls/user/user.route";
 import { authRoutes } from "./moduls/auth/auth.route";
 import { postRoutes } from "./moduls/posts/posts.route";
 import { commentRoutes } from "./moduls/comments/comments.route";
+import { golbalErrorHandler } from "./middlewares/globalErrorhandler";
+import { notFound } from "./middlewares/notFound";
+
 
 
 
@@ -38,6 +41,10 @@ app.use('/api/auth',authRoutes)
 app.use('/api/posts',postRoutes)
 
 app.use("/api/comments",commentRoutes)
+
+app.use(notFound)
+
+ app.use(golbalErrorHandler);
 
 
 
