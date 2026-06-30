@@ -1,11 +1,48 @@
 import { PostStatus } from "../../../generated/prisma/enums"
 import { prisma } from "../../lib/prisma"
-import type { ICreatePayload, IupdatePostPayload } from "./post.interface"
+import type { ICreatePayload, IPostQuery, IupdatePostPayload } from "./post.interface"
 
 
-const getallPostService=async()=>{
+const getallPostService=async(query: IPostQuery )=>{
    const posts= await prisma.post.findMany(
     {
+        
+        //filtering /exact match without And Operator
+        //  where:{
+        //      title:"my firest33 post",
+        //      content: "Content is ready"
+        //  },
+
+
+        // //filtering /exact match with And Operator
+
+        //where:{
+        //    AND:[
+        //        {
+        //            title:"my firest33 post",
+        //        },
+        //        {
+
+        //        },
+        //        {
+        //           content: "Content is ready"
+        //        }
+        //    ]
+        //},
+
+
+        //Searching / partial Match
+        where:{
+             title:{
+                 contains: "my",
+                 mode:"insensitive"
+             }
+        },
+
+
+
+
+
         include:{
              author: {
                  omit: {
