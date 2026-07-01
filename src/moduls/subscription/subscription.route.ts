@@ -1,13 +1,11 @@
-import type { NextFunction, Request, Response } from "express";
-import { catchAsync } from "../../utilis/catchAsync";
+import { Router } from "express";
+import { subscriptionController } from "./subscription.controller";
 
 
-const subscriptionPayment= catchAsync(async( req:Request, res: Response, next: NextFunction)=>{
-     
-})
+const router=Router();
+
+router.post("/checkout",subscriptionController.subscriptionPayment)
 
 
 
-export const subscriptionController={
-     subscriptionPayment
-}
+export const subsCriptionRoutes=router
